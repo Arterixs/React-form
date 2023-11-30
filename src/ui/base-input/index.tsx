@@ -1,6 +1,6 @@
 import { ChangeEvent, InputHTMLAttributes } from 'react';
 import clsx from 'clsx';
-import { InputTypes } from 'types/enum/attributs';
+import { InputTypes } from 'types/enum/attributes';
 import { InputClasses } from 'types/enum/classes';
 
 import styles from './style.module.css';
