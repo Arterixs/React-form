@@ -11,6 +11,8 @@
 
   --shadow: #3636364d;
   --black: #000;
+  --link-hover: #766f85;
+  --link-active: #2b8ab7;
 
   --border-btn-pagination: #a834c3;
   --loader-color: #d5b86f;

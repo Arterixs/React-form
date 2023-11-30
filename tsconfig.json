@@ -13,6 +13,7 @@
     "baseUrl": "src",
     "paths": {
       "app/*": ["app/*"],
+      "layouts/*": ["layouts/*"],
       "components/*": ["components/*"],
       "service/*": ["service/*"],
       "pages/*": ["pages/*"],

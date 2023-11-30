@@ -1,15 +1,13 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  server: {
-    open: '/',
-  },
   resolve: {
     alias: {
       app: '/src/app',
+      layouts: '/src/layouts',
       components: '/src/components',
       service: '/src/service',
       pages: '/src/pages',
@@ -19,7 +17,7 @@ export default defineConfig({
       helpers: '/src/helpers',
       storage: '/src/storage',
       test: '/src/test',
-      store: '/src/store'
+      store: '/src/store',
     },
   },
-})
+});
