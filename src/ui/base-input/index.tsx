@@ -1,4 +1,4 @@
-import { ChangeEvent, InputHTMLAttributes } from 'react';
+import { ChangeEvent, ForwardedRef, forwardRef, InputHTMLAttributes } from 'react';
 import clsx from 'clsx';
 import { InputTypes } from 'types/enum/attributes';
 import { InputClasses } from 'types/enum/classes';
@@ -12,8 +12,17 @@ interface BaseInputProps extends InputHTMLAttributes<HTMLInputElement> {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const BaseInput = (props: BaseInputProps) => {
+export const BaseInput = forwardRef((props: BaseInputProps, ref: ForwardedRef<HTMLInputElement>) => {
   const { type, value, classInput, onChange, ...attrs } = props;
   const classes = clsx(styles[classInput], styles.default);
-  return <input className={classes} type={type} value={value} onChange={onChange} {...attrs} />;
-};
+  return (
+    <input 
+      className={classes} 
+      ref={ref} 
+      type={type} 
+      value={value} 
+      onChange={onChange} 
+      {...attrs} 
+    />
+  );
+});
