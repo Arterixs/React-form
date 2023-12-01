@@ -1,0 +1,22 @@
+.fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 5px;
+  border: 1px solid var(--color-form-legend);
+  border-radius: 10px;
+}
+
+.legend {
+  color: var(--color-form-legend);
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+
+.errorField {
+  border-color: var(--color-error);
+}
+
+.errorLegend {
+  color: var(--color-error);
+}

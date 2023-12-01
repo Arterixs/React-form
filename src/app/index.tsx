@@ -3,7 +3,7 @@ import { Layout } from 'layouts/default';
 import { NotFound } from 'pages/404';
 import { Controlled } from 'pages/controlled';
 import { Main } from 'pages/main';
-import { Uncontrolled } from 'pages/uncontrolled';
+import { UncontrolledForm } from 'pages/uncontrolled-form';
 import { RouteApp } from 'types/enum/routes';
 
 export const App = () => (
@@ -13,7 +13,7 @@ export const App = () => (
       <Route index element={<Navigate to={RouteApp.MAIN} />} />
       <Route path={RouteApp.MAIN} element={<Main />} />
       <Route path={RouteApp.CONTROLLED} element={<Controlled />} />
-      <Route path={RouteApp.UNCONTROLLED} element={<Uncontrolled />} />
+      <Route path={RouteApp.UNCONTROLLED} element={<UncontrolledForm />} />
     </Route>
   </Routes>
 );
