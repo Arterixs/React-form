@@ -1,0 +1,61 @@
+.default {
+  width: 100px;
+  transition: var(--input-transition);
+  border: 2px solid var(--input-border);
+  outline: none;
+  appearance: none;
+  -moz-appearance: textfield;
+}
+
+.default::-webkit-outer-spin-button,
+.default::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.default:hover {
+  -webkit-appearance: none;
+  appearance: none;
+  -moz-appearance: textfield;
+  transition: var(--input-transition);
+}
+
+.default:focus {
+  border-color: var(--input-focus-border);
+  -webkit-appearance: none;
+  appearance: none;
+  -moz-appearance: textfield;
+  transition: var(--input-transition);
+}
+
+.dialed-input {
+  width: 230px;
+  height: 30px;
+  border-radius: 15px;
+  padding: 5px 10px;
+}
+
+.file {
+  appearance: auto;
+  width: auto;
+  cursor: pointer;
+  border: none;
+}
+
+.file:hover {
+  color: var(--input-focus-border);
+}
+
+.checked {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  appearance: auto;
+}
+
+.file:hover,
+.file:focus,
+.checked:focus,
+.checked:hover {
+  appearance: auto;
+}

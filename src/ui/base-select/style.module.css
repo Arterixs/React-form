@@ -1,0 +1,23 @@
+.default {
+  transition: var(--input-transition);
+  border: 2px solid var(--input-border);
+  outline: none;
+  padding: 5px;
+}
+
+
+.country-select {
+  width: 120px;
+  height: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+.country-select:focus {
+  border: 2px solid var(--input-focus-border);
+}
+
+.option {
+  padding: 5px;
+}
