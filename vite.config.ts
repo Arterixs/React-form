@@ -18,6 +18,7 @@ export default defineConfig({
       storage: '/src/storage',
       test: '/src/test',
       store: '/src/store',
+      data: '/src/data'
     },
   },
 });

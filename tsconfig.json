@@ -23,7 +23,8 @@
       "helpers/*": ["helpers/*"],
       "storage/*": ["storage/*"],
       "test/*": ["test/*"],
-      "store/*": ["store/*"]
+      "store/*": ["store/*"],
+      "data/*": ["mock-data/*"]
     },
 
     /* Bundler mode */

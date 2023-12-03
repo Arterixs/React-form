@@ -5,10 +5,14 @@
   --color-form-legend: #787878;
   --title-form: #787878;
 
+  --input-border: #71c19744;
+  --input-focus-border: #329ad7;
+
   --shadow: #3636364d;
   --black: #000;
   --link-hover: #766f85;
   --link-active: #2b8ab7;
 
   --btn-main-transition: all 0.3s ease;
+  --input-transition: all 0.1s ease;
 }

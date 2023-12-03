@@ -6,22 +6,21 @@ import { InputClasses } from 'types/enum/classes';
 import styles from './style.module.css';
 
 interface BaseInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  value: string;
   type: InputTypes;
   classInput: InputClasses;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  id?: string;
+  value?: string;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const BaseInput = forwardRef((props: BaseInputProps, ref: ForwardedRef<HTMLInputElement>) => {
-  const { type, value, classInput, onChange, ...attrs } = props;
+  const { type, classInput, onChange, ...attrs } = props;
   const classes = clsx(styles[classInput], styles.default);
   return (
     <input 
       className={classes} 
       ref={ref} 
       type={type} 
-      value={value} 
-      onChange={onChange} 
       {...attrs} 
     />
   );
