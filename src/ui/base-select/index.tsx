@@ -1,4 +1,4 @@
-import { SelectHTMLAttributes } from 'react';
+import { ForwardedRef, forwardRef,SelectHTMLAttributes } from 'react';
 import clsx from 'clsx';
 import { CountryOptionsValue } from 'data';
 import { SelectClasses } from 'types/enum/classes';
@@ -10,14 +10,14 @@ interface BaseSelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   classSelect: SelectClasses
 }
 
-export const BaseSelect = (props: BaseSelectProps) => {
+export const BaseSelect = forwardRef((props: BaseSelectProps,  ref: ForwardedRef<HTMLSelectElement>) => {
   const { classSelect, ...attrs } = props;
   const classes = clsx(styles[classSelect], styles.default);
   return (
-    <select className={classes} {...attrs}>
+    <select className={classes} {...attrs}  ref={ref}>
       {props.options.map((item) => (
         <option className={styles.option} key={item.id}>{item.name}</option>
       ) )}
     </select>
   )
-}
+})

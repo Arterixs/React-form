@@ -1,11 +1,15 @@
+import { useRef } from 'react';
 import clsx from 'clsx';
 import { CountryOptions } from 'data';
+import { getStringBase64 } from 'helpers/getStringBase64';
 import { Fieldset } from 'layouts/fieldset';
 import { InputTypes } from 'types/enum/attributes';
 import { InputClasses, SelectClasses } from 'types/enum/classes';
 import { LegendName } from 'types/enum/legend';
 import { BaseInput } from 'ui/base-input';
 import { BaseSelect } from 'ui/base-select';
+import { formSchema } from 'validate/index';
+import { ValidationError } from 'yup';
 
 import styles from './style.module.css';
 
@@ -40,6 +44,51 @@ const enum GroupRadioName {
 export const Form = () => {
   const rowLabelDirection = clsx(styles.label, styles.row)
   const columnLabelDirection = clsx(styles.label, styles.column)
+
+  const nameRef = useRef<HTMLInputElement | null>(null)
+  const ageRef = useRef<HTMLInputElement | null>(null)
+  const emailRef = useRef<HTMLInputElement | null>(null)
+  const passwordRef = useRef<HTMLInputElement | null>(null)
+  const repeatPasswordRef = useRef<HTMLInputElement | null>(null)
+  const maleRef = useRef<HTMLInputElement | null>(null)
+  const femaleRef = useRef<HTMLInputElement | null>(null)
+  const countryRef = useRef<HTMLSelectElement | null>(null)
+  const fileRef = useRef<HTMLInputElement | null>(null)
+  const agreeRef = useRef<HTMLInputElement | null>(null)
+
+  const submitForm = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault()
+    const nameValue = nameRef.current?.value
+    const ageValue = ageRef.current?.value
+    const emailValue = emailRef.current?.value
+    const passwordValue = passwordRef.current?.value
+    const repeatPasswordValue = repeatPasswordRef.current?.value
+    const genderValue = [maleRef, femaleRef].find((ref) => ref.current?.checked)?.current?.value
+    const agreeValue = agreeRef.current?.checked
+    const countryValue = countryRef.current?.value
+    const fileValue = fileRef.current?.files
+
+    const formData = {
+      name: nameValue, 
+      age: ageValue, 
+      email: emailValue,
+      password: passwordValue,
+      repeatPassword: repeatPasswordValue,
+      gender: genderValue,
+      country: countryValue,
+      image: fileValue,
+      agree: agreeValue
+    }
+    try {
+      const validObject = await formSchema.validate(formData, {abortEarly: false})
+      const base64String = await getStringBase64(fileValue![0])
+      Object.assign(validObject, {image: base64String})
+    } catch(error: unknown) {
+      if (error instanceof ValidationError) {
+        console.log(error.errors, error.inner.map((err) => err.path))
+      }
+    }
+  }
   return (
     <form className={styles.form}>
       <Fieldset 
@@ -52,7 +101,8 @@ export const Form = () => {
           <BaseInput 
             type={InputTypes.TEXT} 
             classInput={InputClasses.DIALED} 
-            id={IdInputsForBindingLabel.NAME} 
+            id={IdInputsForBindingLabel.NAME}
+            ref={nameRef}
           />
         </div>
       </Fieldset>
@@ -66,7 +116,8 @@ export const Form = () => {
           <BaseInput 
             type={InputTypes.NUMBER} 
             classInput={InputClasses.DIALED} 
-            id={IdInputsForBindingLabel.AGE} 
+            id={IdInputsForBindingLabel.AGE}
+            ref={ageRef}
           />
         </div>
       </Fieldset>
@@ -80,7 +131,8 @@ export const Form = () => {
           <BaseInput 
             type={InputTypes.EMAIL} 
             classInput={InputClasses.DIALED} 
-            id={IdInputsForBindingLabel.EMAIL} 
+            id={IdInputsForBindingLabel.EMAIL}
+            ref={emailRef}
           />
         </div>
       </Fieldset>
@@ -92,6 +144,7 @@ export const Form = () => {
               type={InputTypes.PASSWORD} 
               classInput={InputClasses.DIALED} 
               id={IdInputsForBindingLabel.PASSWORD} 
+              ref={passwordRef}
             />
           </div>
         </label>
@@ -101,7 +154,8 @@ export const Form = () => {
             <BaseInput 
               type={InputTypes.PASSWORD} 
               classInput={InputClasses.DIALED} 
-              id={IdInputsForBindingLabel.REPEAT} 
+              id={IdInputsForBindingLabel.REPEAT}
+              ref={repeatPasswordRef}
             />
           </div>
         </label>
@@ -114,7 +168,9 @@ export const Form = () => {
               type={InputTypes.RADIO} 
               classInput={InputClasses.CHECKED} 
               id={IdInputsForBindingLabel.MALE} 
-              name={GroupRadioName.GENDER} 
+              name={GroupRadioName.GENDER}
+              ref={maleRef}
+              value="male"
             />
           </div>
         </label>
@@ -125,7 +181,9 @@ export const Form = () => {
               type={InputTypes.RADIO} 
               classInput={InputClasses.CHECKED} 
               id={IdInputsForBindingLabel.FEMALE} 
-              name={GroupRadioName.GENDER} 
+              name={GroupRadioName.GENDER}
+              ref={femaleRef}
+              value="female"
             />
           </div>
         </label>
@@ -140,7 +198,8 @@ export const Form = () => {
           <BaseSelect 
             classSelect={SelectClasses.COUNTRY} 
             options={CountryOptions} 
-            id={IdInputsForBindingLabel.COUNTRY} 
+            id={IdInputsForBindingLabel.COUNTRY}
+            ref={countryRef}
           />
         </div>
       </Fieldset>
@@ -154,7 +213,8 @@ export const Form = () => {
           <BaseInput 
             type={InputTypes.FILE} 
             classInput={InputClasses.FILE} 
-            id={IdInputsForBindingLabel.FILE} 
+            id={IdInputsForBindingLabel.FILE}
+            ref={fileRef}
           />
         </div>
       </Fieldset>
@@ -168,11 +228,18 @@ export const Form = () => {
           <BaseInput 
             type={InputTypes.CHECKBOX} 
             classInput={InputClasses.CHECKED} 
-            id={IdInputsForBindingLabel.AGREE} 
+            id={IdInputsForBindingLabel.AGREE}
+            ref={agreeRef}
           />
         </div>
       </Fieldset>
-      <button className={styles.submit} type="submit">Submit</button>
+      <button 
+        className={styles.submit} 
+        type="submit"
+        onClick={submitForm}
+      >
+        Submit
+      </button>
     </form>
   )
 };

@@ -24,7 +24,8 @@
       "storage/*": ["storage/*"],
       "test/*": ["test/*"],
       "store/*": ["store/*"],
-      "data/*": ["mock-data/*"]
+      "data/*": ["data/*"],
+      "validate/*": ["validate/*"]
     },
 
     /* Bundler mode */
